@@ -13,8 +13,9 @@ import { ShoppingCartModule } from "./shopping_cart/shopping_cart.module";
 import { Prescription } from "./prescriptions/prescriptions.model";
 import { Medication } from "./medication/medication.model";
 import { Cart } from "./shopping_cart/shopping_cart.model";
-import { AuthModule } from './auth/auth.module';
-import { CategoryModule } from './category/category.module';
+import { AuthModule } from "./auth/auth.module";
+import { CategoryModule } from "./category/category.module";
+import { Category } from "./category/category.model";
 
 @Module({
   imports: [
@@ -29,7 +30,15 @@ import { CategoryModule } from './category/category.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Customer, Doctor, Pharmacy, Prescription, Medication, Cart],
+      models: [
+        Customer,
+        Doctor,
+        Pharmacy,
+        Prescription,
+        Medication,
+        Cart,
+        Category,
+      ],
       autoLoadModels: true,
     }),
     CustomersModule,
