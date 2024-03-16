@@ -15,7 +15,7 @@ interface MedicationCreationAttrs {
   name: string;
   description: string;
   article_number: string;
-  category: number;
+  category_id: number;
   priority: number;
   price: number;
   allowed_dosage: string;
