@@ -7,6 +7,7 @@ import {
   ForeignKey,
   BelongsTo,
 } from "sequelize-typescript";
+import { Category } from "src/category/category.model";
 import { Pharmacy } from "src/pharamacies/pharamacies.model";
 import { Cart } from "src/shopping_cart/shopping_cart.model";
 
@@ -14,7 +15,7 @@ interface MedicationCreationAttrs {
   name: string;
   description: string;
   article_number: string;
-  category: string;
+  category: number;
   priority: number;
   price: number;
   allowed_dosage: string;
@@ -42,9 +43,6 @@ export class Medication extends Model<Medication, MedicationCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   article_number: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  category: string;
-
   @Column({ type: DataType.INTEGER, allowNull: false })
   price: number;
 
@@ -70,4 +68,11 @@ export class Medication extends Model<Medication, MedicationCreationAttrs> {
 
   @BelongsTo(() => Cart)
   shoppingCart: Cart;
+
+  @ForeignKey(() => Category)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  categoryId: number;
+
+  @BelongsTo(() => Category)
+  category: Category;
 }

@@ -6,12 +6,12 @@ import { AuthService } from "./auth.service";
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post("/login")
+  @Post("/login/customer")
   login(@Body() customerDto: CreateCustomerDto) {
     return this.authService.login(customerDto);
   }
 
-  @Post("/registration")
+  @Post("/registration/customer")
   async registration(@Body() customerDto: CreateCustomerDto) {
     return this.authService.registration(customerDto);
   }

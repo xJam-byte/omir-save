@@ -14,6 +14,7 @@ import { Prescription } from "./prescriptions/prescriptions.model";
 import { Medication } from "./medication/medication.model";
 import { Cart } from "./shopping_cart/shopping_cart.model";
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AuthModule } from './auth/auth.module';
     MedicationModule,
     ShoppingCartModule,
     AuthModule,
+    CategoryModule,
   ],
   providers: [],
   controllers: [],
