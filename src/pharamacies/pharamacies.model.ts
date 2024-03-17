@@ -6,6 +6,7 @@ import { PharmacyRating } from "src/pharmacy-rating/pharmacy-rating.model";
 interface PharmacyCreationAttrs {
   name: string;
   email: string;
+  description: string;
   password: string;
   phoneNumber: string;
   picture: string;
@@ -43,6 +44,9 @@ export class Pharmacy extends Model<Pharmacy, PharmacyCreationAttrs> {
   })
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  description: string;
 
   @ApiProperty({
     example: "+7-778-999-5599",
