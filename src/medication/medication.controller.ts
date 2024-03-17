@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { MedicationService } from "./medication.service";
 import { CreateMedicationDto } from "./Dto/create-medication-dto";
 
@@ -14,5 +14,10 @@ export class MedicationController {
   @Get()
   getAll() {
     return this.medicService.getAllMedics();
+  }
+
+  @Get("/byId")
+  getMedicationByPharmacyId(@Body() id: number) {
+    return this.medicService.getMedicationByPharmacy(id);
   }
 }

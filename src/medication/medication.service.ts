@@ -17,4 +17,11 @@ export class MedicationService {
     const users = await this.medRepository.findAll();
     return users;
   }
+
+  async getMedicationByPharmacy(id: number) {
+    const users = await this.medRepository.findAll({
+      where: { pharmacy_id: id },
+    });
+    return users;
+  }
 }
