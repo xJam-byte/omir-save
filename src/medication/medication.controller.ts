@@ -17,7 +17,7 @@ export class MedicationController {
   }
 
   @Get("/byId")
-  getMedicationByPharmacyId(@Body() id: number) {
+  getMedicationByPharmacyId(@Query("id") id: number) {
     return this.medicService.getMedicationByPharmacy(id);
   }
 }
