@@ -16,11 +16,13 @@ interface MedicationCreationAttrs {
   description: string;
   article_number: string;
   picture: string;
-  category_id: number;
   priority: number;
   price: number;
+  manufacturer: string;
+  country: string;
   allowed_dosage: string;
   pharmacy_id: number;
+  category_id: number;
   quantity: number;
 }
 
@@ -52,6 +54,10 @@ export class Medication extends Model<Medication, MedicationCreationAttrs> {
 
   @Column({ type: DataType.STRING, allowNull: true })
   picture: string;
+  @Column({ type: DataType.STRING, allowNull: true })
+  manufacturer: string;
+  @Column({ type: DataType.STRING, allowNull: true })
+  country: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   priority: number;
