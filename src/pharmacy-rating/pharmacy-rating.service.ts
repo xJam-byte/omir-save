@@ -31,4 +31,9 @@ export class PharmacyRatingService {
     });
     return users;
   }
+
+  async getAllRating() {
+    const users = await this.ratingRepository.findAll();
+    return users;
+  }
 }
