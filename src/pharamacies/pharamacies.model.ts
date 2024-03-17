@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Column, Model, DataType, Table, HasMany } from "sequelize-typescript";
 import { Medication } from "src/medication/medication.model";
+import { PharmacyRating } from "src/pharmacy-rating/pharmacy-rating.model";
 
 interface PharmacyCreationAttrs {
   name: string;
@@ -62,4 +63,7 @@ export class Pharmacy extends Model<Pharmacy, PharmacyCreationAttrs> {
 
   @HasMany(() => Medication)
   medications: Medication[];
+
+  @HasMany(() => PharmacyRating)
+  ratings: PharmacyRating[];
 }

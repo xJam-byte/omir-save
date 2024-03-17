@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Customer } from "./customers.model";
+import * as bcrypt from "bcryptjs";
 import { CreateCustomerDto } from "./Dto/create.customer.dto";
 
 @Injectable()
@@ -27,6 +28,24 @@ export class CustomersService {
     return user;
   }
 
+  async getUserById(id: number) {
+    const user = await this.customerRepository.findOne({
+      where: { id: id },
+      include: { all: true },
+    });
+
+    return user;
+  }
+
+  async getUserByIIN(iin: string) {
+    const user = await this.customerRepository.findOne({
+      where: { iin: iin },
+      include: { all: true },
+    });
+
+    return user;
+  }
+
   async updateNameSurnamePhone(user: any) {
     const customer = await this.customerRepository.findOne({
       where: { iin: user.iin },
@@ -43,6 +62,41 @@ export class CustomersService {
       },
       { where: { id: customer.id } }
     );
+
+    await customer.save();
+    return customer;
+  }
+
+  async updateEmail(user: any) {
+    const customer = await this.customerRepository.findOne({
+      where: { iin: user.iin },
+    });
+
+    if (!customer) {
+      throw new Error("Клиент с указанным ИИН не найден.");
+    }
+    await customer.update(
+      {
+        email: user.email,
+      },
+      { where: { id: customer.id } }
+    );
+
+    await customer.save();
+    return customer;
+  }
+
+  async updatePassword(user: any) {
+    const customer = await this.customerRepository.findOne({
+      where: { iin: user.iin },
+    });
+
+    if (!customer) {
+      throw new Error("Клиент с указанным ИИН не найден.");
+    }
+
+    const hash = await bcrypt.hash(user.password, 5);
+    await customer.update({ password: hash }, { where: { id: customer.id } });
 
     await customer.save();
     return customer;

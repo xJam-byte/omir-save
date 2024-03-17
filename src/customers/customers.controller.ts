@@ -23,8 +23,18 @@ export class CustomersController {
     return this.customersService.getAllUsers();
   }
 
-  @Post("/update")
+  @Post("/update/contacts")
   updateNameSurnamePhone(@Body() user: any) {
     return this.customersService.updateNameSurnamePhone(user);
+  }
+
+  @Post("/update/email")
+  updateEmail(@Body() user: any) {
+    return this.customersService.updateEmail(user);
+  }
+
+  @Post("/update/password")
+  updatePassword(@Body() user: any) {
+    return this.customersService.updatePassword(user);
   }
 }

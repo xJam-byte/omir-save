@@ -16,6 +16,8 @@ import { Cart } from "./shopping_cart/shopping_cart.model";
 import { AuthModule } from "./auth/auth.module";
 import { CategoryModule } from "./category/category.module";
 import { Category } from "./category/category.model";
+import { PharmacyRatingModule } from "./pharmacy-rating/pharmacy-rating.module";
+import { PharmacyRating } from "./pharmacy-rating/pharmacy-rating.model";
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { Category } from "./category/category.model";
         Prescription,
         Medication,
         Cart,
+        PharmacyRating,
         Category,
       ],
       autoLoadModels: true,
@@ -49,6 +52,7 @@ import { Category } from "./category/category.model";
     ShoppingCartModule,
     AuthModule,
     CategoryModule,
+    PharmacyRatingModule,
   ],
   providers: [],
   controllers: [],

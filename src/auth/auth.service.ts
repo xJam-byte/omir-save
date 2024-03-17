@@ -50,9 +50,7 @@ export class AuthService {
   }
 
   private async validateCustomer(customerDto: CreateCustomerDto) {
-    const customer = await this.customerService.getUserByEmail(
-      customerDto.email
-    );
+    const customer = await this.customerService.getUserByIIN(customerDto.iin);
     const password = await bcrypt.compare(
       customerDto.password,
       customer.password
