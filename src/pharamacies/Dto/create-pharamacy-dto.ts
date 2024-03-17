@@ -3,5 +3,6 @@ export class CreatePharmacyDto {
   readonly email: string;
   readonly password: string;
   readonly phoneNumber: string;
+  readonly picture: string;
   readonly address: string;
 }

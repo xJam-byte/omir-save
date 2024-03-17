@@ -26,4 +26,25 @@ export class CustomersService {
 
     return user;
   }
+
+  async updateNameSurnamePhone(user: any) {
+    const customer = await this.customerRepository.findOne({
+      where: { iin: user.iin },
+    });
+
+    if (!customer) {
+      throw new Error("Клиент с указанным ИИН не найден.");
+    }
+    const e = await customer.update(
+      {
+        firstName: user.name,
+        lastName: user.surname,
+        phoneNumber: user.number,
+      },
+      { where: { id: customer.id } }
+    );
+
+    await customer.save();
+    return customer;
+  }
 }

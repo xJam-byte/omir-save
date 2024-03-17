@@ -4,8 +4,6 @@ import {
   Model,
   DataType,
   Table,
-  ForeignKey,
-  BelongsTo,
   HasOne,
   HasMany,
 } from "sequelize-typescript";
@@ -15,12 +13,11 @@ import { Cart } from "src/shopping_cart/shopping_cart.model";
 interface CustomerCreationAttrs {
   firstName: string;
   lastName: string;
-  middleName: string;
   email: string;
   password: string;
   phoneNumber: string;
   address: string;
-  iin: number;
+  iin: string;
 }
 
 @Table({ tableName: "user_customers" })
@@ -47,13 +44,6 @@ export class Customer extends Model<Customer, CustomerCreationAttrs> {
   })
   @Column({ type: DataType.STRING, allowNull: false })
   lastName: string;
-
-  @ApiProperty({
-    example: "",
-    description: "Middle name of the customer",
-  })
-  @Column({ type: DataType.STRING, allowNull: true })
-  middleName: string;
 
   @ApiProperty({
     example: "user@gmail.com",
@@ -83,8 +73,8 @@ export class Customer extends Model<Customer, CustomerCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   address: string;
 
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  iin: number;
+  @Column({ type: DataType.STRING, allowNull: false })
+  iin: string;
 
   @HasMany(() => Prescription)
   prescriptions: Prescription[];

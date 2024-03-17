@@ -7,6 +7,7 @@ interface PharmacyCreationAttrs {
   email: string;
   password: string;
   phoneNumber: string;
+  picture: string;
   address: string;
 }
 
@@ -48,6 +49,9 @@ export class Pharmacy extends Model<Pharmacy, PharmacyCreationAttrs> {
   })
   @Column({ type: DataType.STRING, allowNull: false })
   phoneNumber: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  picture: string;
 
   @ApiProperty({
     example: "",

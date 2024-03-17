@@ -2,6 +2,7 @@ export class CreateMedicationDto {
   readonly name: string;
   readonly description: string;
   readonly article_number: string;
+  readonly picture: string;
   readonly category_id: number;
   readonly priority: number;
   readonly price: number;

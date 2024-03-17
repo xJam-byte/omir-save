@@ -22,4 +22,9 @@ export class CustomersController {
   getAll() {
     return this.customersService.getAllUsers();
   }
+
+  @Post("/update")
+  updateNameSurnamePhone(@Body() user: any) {
+    return this.customersService.updateNameSurnamePhone(user);
+  }
 }
