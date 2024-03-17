@@ -22,13 +22,11 @@ export class AuthService {
   }
 
   async registration(customerDto: CreateCustomerDto) {
-    const candidate = await this.customerService.getUserByEmail(
-      customerDto.email
-    );
+    const candidate = await this.customerService.getUserByIIN(customerDto.iin);
 
     if (candidate) {
       throw new HttpException(
-        "Пользователь с таким email уже существует",
+        "Пользователь с таким iin уже существует",
         HttpStatus.BAD_REQUEST
       );
     }
