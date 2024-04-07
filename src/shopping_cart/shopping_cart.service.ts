@@ -24,7 +24,8 @@ export class ShoppingCartService {
     const infomed = [];
     for (const m of medics) {
       const med = await this.medicRepository.getMedicationById(m.medication_id);
-      infomed.push(med[0]);
+      med[0]["quantity"] = m.quantity;
+      infomed.push(med);
     }
 
     return infomed;
