@@ -27,7 +27,6 @@ export class ShoppingCartService {
       infomed.push(med[0]);
     }
 
-    console.log(infomed);
     return infomed;
   }
 }
