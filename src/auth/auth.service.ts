@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
   async login(customerDto: CreateCustomerDto) {
     const customer = await this.validateCustomer(customerDto);
-    return this.generateToken(customer);
+    return [this.generateToken(customer), customer];
   }
 
   async registration(customerDto: CreateCustomerDto) {
@@ -36,7 +36,7 @@ export class AuthService {
       ...customerDto,
       password: hash,
     });
-    return this.generateToken(customer);
+    return [this.generateToken(customer), customer];
   }
 
   private async generateToken(user: Customer) {
