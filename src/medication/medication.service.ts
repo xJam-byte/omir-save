@@ -10,7 +10,11 @@ export class MedicationService {
   ) {}
 
   async createMedic(dto: CreateMedicationDto) {
+    console.log(dto);
+
     const user = await this.medRepository.create(dto);
+    console.log(user);
+
     return user;
   }
   async getAllMedics() {

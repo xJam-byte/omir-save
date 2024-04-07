@@ -8,6 +8,8 @@ export class MedicationController {
 
   @Post()
   create(@Body() dto: CreateMedicationDto) {
+    console.log(dto);
+
     return this.medicService.createMedic(dto);
   }
 

@@ -81,7 +81,7 @@ export class Medication extends Model<Medication, MedicationCreationAttrs> {
 
   @ForeignKey(() => Category)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  categoryId: number;
+  category_id: number;
 
   @BelongsTo(() => Category)
   category: Category;
