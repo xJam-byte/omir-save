@@ -28,4 +28,10 @@ export class MedicationService {
     });
     return users;
   }
+  async getMedicationById(id: number) {
+    const users = await this.medRepository.findAll({
+      where: { id: id },
+    });
+    return users;
+  }
 }

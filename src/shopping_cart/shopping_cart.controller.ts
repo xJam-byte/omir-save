@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { ShoppingCartService } from "./shopping_cart.service";
 import { CreateCartDto } from "./Dto/create-cart.dto";
 
@@ -12,7 +12,7 @@ export class ShoppingCartController {
   }
 
   @Get()
-  getAll() {
-    return this.cartService.getAll();
+  getAllById(@Query("user_id") id: number) {
+    return this.cartService.getAll(id);
   }
 }
