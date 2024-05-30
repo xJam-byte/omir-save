@@ -3,11 +3,14 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Customer } from "./customers.model";
 import * as bcrypt from "bcryptjs";
 import { CreateCustomerDto } from "./Dto/create.customer.dto";
+import { JwtService } from "@nestjs/jwt";
+import { log } from "console";
 
 @Injectable()
 export class CustomersService {
   constructor(
-    @InjectModel(Customer) private customerRepository: typeof Customer
+    @InjectModel(Customer) private customerRepository: typeof Customer,
+    private jwtService: JwtService
   ) {}
 
   async createUser(dto: CreateCustomerDto) {
@@ -26,6 +29,14 @@ export class CustomersService {
     });
 
     return user;
+  }
+
+  async getUserByToken(token : string){
+    log(token)
+    const t = this.jwtService.decode(token);
+    log("EMAIL IS: ",t.email);
+    const uses = await this.getUserByEmail(t.email);
+    return uses;
   }
 
   async getUserById(id: number) {

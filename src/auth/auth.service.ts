@@ -9,6 +9,8 @@ import { CreateCustomerDto } from "src/customers/Dto/create.customer.dto";
 import { CustomersService } from "src/customers/customers.service";
 import * as bcrypt from "bcryptjs";
 import { Customer } from "src/customers/customers.model";
+import { log } from "console";
+import { LoginCustomerDto } from "./login.customer.dto";
 
 @Injectable()
 export class AuthService {
@@ -16,9 +18,14 @@ export class AuthService {
     private customerService: CustomersService,
     private jwtService: JwtService
   ) {}
-  async login(customerDto: CreateCustomerDto) {
+  async login(customerDto: LoginCustomerDto) {
     const customer = await this.validateCustomer(customerDto);
-    return [this.generateToken(customer), customer];
+    // console.log("token is:",this.generateToken(customer));
+    const token = await this.generateToken(customer);
+    return token;
+    // return {token : await this.generateToken(customer), user: customer};
+    // return this.generateToken(customer);
+
   }
 
   async registration(customerDto: CreateCustomerDto) {
@@ -36,7 +43,9 @@ export class AuthService {
       ...customerDto,
       password: hash,
     });
-    return [this.generateToken(customer), customer];
+    // return {token : this.generateToken(customer), user: customer};
+    return await this.generateToken(customer);
+    // return this.generateToken(customer);
   }
 
   private async generateToken(user: Customer) {
@@ -47,8 +56,8 @@ export class AuthService {
     };
   }
 
-  private async validateCustomer(customerDto: CreateCustomerDto) {
-    const customer = await this.customerService.getUserByIIN(customerDto.iin);
+  private async validateCustomer(customerDto: LoginCustomerDto) {
+    const customer = await this.customerService.getUserByEmail(customerDto.email);
     const password = await bcrypt.compare(
       customerDto.password,
       customer.password

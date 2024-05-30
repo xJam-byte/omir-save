@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CustomersService } from "./customers.service";
 import { Customer } from "./customers.model";
@@ -21,6 +21,10 @@ export class CustomersController {
   @Get()
   getAll() {
     return this.customersService.getAllUsers();
+  }
+  @Get("/getByToken")
+  getUserByToken(@Query("token") t: string) {
+    return this.customersService.getUserByToken(t);
   }
 
   @Post("/update/contacts")
